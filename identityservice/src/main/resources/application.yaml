@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: identityservice
+  datasource:
+    url: jdbc:postgresql://localhost:5432/authdb
+    username: postgres
+    password: 2580
+  jpa:
+    hibernate:
+      ddl-auto: update
+server:
+  port: 8081
+
+jwt:
+  expiration: 60000
+  secret: "VMceQdsw58pyF0vl6QMPjIt7k5FkKH6voD7aDWV/ljRVXQuCOx9Qv+bJki0EbmgEcP3f0CroEX54wrCjAANtr5S5Rz7q/FYIeE1gTPnLeudRbneeiLyMx5VthhL3HD8LfFyGWYdX4S96QorJIaLrfSa2rpIL1Rj9XTxOLO1XB1h2keuJWETB9Pt4gVX8+sxvsaptbegYOH8AX+J4uV+XS0a2BSfqBxtSJRXrBIKeelmsmxk1gblh/fLyQS0YHNYfRmW5wLyaMNfQzQWHD36O5ZVthOZaNF3EKFyy0GY1gIb6vQLupAHZLTza2Ozx23FYPtNxJbrvUgE/dsak2hJtOsNNGrGDeCTqeHUv3US1ShM="

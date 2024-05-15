@@ -1,0 +1,11 @@
+groups:
+  - name: service-down
+    rules:
+      - alert: InstanceDown
+        expr: up{job="example-service"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Example service is down"
+          description: "Example service is down for longer than 1 minute."
