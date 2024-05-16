@@ -14,7 +14,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     //@Retry(name="retry1", fallbackMethod = "fallbackMethod")
-    @Cacheable(cacheNames = "callProductClientCache")
+    //@Cacheable(cacheNames = "callProductClientCache")
     public String get() {
         return productClient.get();
         //throw new RuntimeException();
