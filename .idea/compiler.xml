@@ -11,6 +11,7 @@
         <module name="core" />
         <module name="common" />
         <module name="productservice" />
+        <module name="categoryservice" />
         <module name="discoveryserver" />
         <module name="exampleservice" />
         <module name="orderservice" />
@@ -31,6 +32,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="categoryservice" options="-parameters" />
       <module name="common" options="-parameters" />
       <module name="core" options="-parameters" />
       <module name="discoveryserver" options="-parameters" />
