@@ -18,20 +18,18 @@ import java.lang.runtime.ObjectMethods;
 @RequestMapping("api/v1/category")
 @RequiredArgsConstructor
 public class CategoryController {
-    private final ObjectMapper objectMapper;
-
-    private final EncryptionService encryptionService;
     private final DecryptionService decryptionService;
 
     @PostMapping("encrypt")
     @Encrypted
     public Category encrypt(@RequestBody Category category) throws Exception
     {
+        category.setName(category.getName() + " deneme 123");
         return category;
     }
 
     @PostMapping("decrypt")
-    public Category decrypt(@Decrypted @RequestBody String encryptedData) throws Exception
+    public Category decrypt(@RequestBody String encryptedData) throws Exception
     {
         Category category = decryptionService.convert(encryptedData, Category.class);
         return category;
