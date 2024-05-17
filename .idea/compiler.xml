@@ -14,6 +14,8 @@
         <module name="categoryservice" />
         <module name="discoveryserver" />
         <module name="exampleservice" />
+        <module name="paymentservice" />
+        <module name="orderorchestrator" />
         <module name="orderservice" />
       </profile>
       <profile name="Annotation profile for identityservice" enabled="true">
@@ -39,7 +41,9 @@
       <module name="exampleservice" options="-parameters" />
       <module name="gatewayserver" options="-parameters" />
       <module name="identityservice" options="-parameters" />
+      <module name="orderorchestrator" options="-parameters" />
       <module name="orderservice" options="-parameters" />
+      <module name="paymentservice" options="-parameters" />
       <module name="productservice" options="-parameters" />
     </option>
   </component>
