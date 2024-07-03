@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Progress Example</title>
+		<script>
+			function startProgress() {
+				const xhr = new XMLHttpRequest();
+				xhr.open("GET", "http://localhost:8061/api/v1/file/progress", true);
+
+				xhr.onprogress = function (event) {
+					console.log(event);
+					const progressData = event.target.responseText.trim().split("\n");
+					const lastProgress = progressData[progressData.length - 1];
+					document.getElementById("progress").innerText = lastProgress;
+				};
+
+				xhr.onload = function () {
+					if (xhr.status === 200) {
+						console.log("Progress complete");
+					}
+				};
+
+				xhr.onerror = function () {
+					console.error("Request failed");
+				};
+
+				xhr.send();
+			}
+		</script>
+	</head>
+	<body>
+		<h1>Progress Example</h1>
+		<button onclick="startProgress()">Start Progress</button>
+		<div id="progress">0%</div>
+	</body>
+</html>

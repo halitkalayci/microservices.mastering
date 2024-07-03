@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>File Upload Progress Example</title>
+		<style>
+			#progress > p {
+				margin-bottom: 50px;
+				border-bottom: 1px solid red;
+			}
+		</style>
+		<script>
+			function uploadFiles() {
+				const files = document.getElementById("fileInput").files;
+				if (files.length === 0) {
+					alert("Please select files to upload.");
+					return;
+				}
+
+				const formData = new FormData();
+				for (let i = 0; i < files.length; i++) {
+					formData.append("files", files[i]);
+				}
+
+				const xhr = new XMLHttpRequest();
+				xhr.open("POST", "http://localhost:8061/api/v1/file/upload2", true);
+
+				xhr.onreadystatechange = function () {
+					if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+						console.log("Upload complete");
+					}
+				};
+
+				xhr.onprogress = function (event) {
+					const progressElement = document.getElementById("progress");
+					const p = document.createElement("p");
+					const texts = event.target.responseText.trim().split("\n");
+					const lastText = texts[texts.length - 1];
+					p.innerHTML = lastText;
+					progressElement.appendChild(p);
+				};
+
+				xhr.onerror = function () {
+					console.error("Request failed");
+				};
+
+				xhr.send(formData);
+			}
+		</script>
+	</head>
+	<body>
+		<h1>File Upload Progress Example</h1>
+		<input type="file" id="fileInput" multiple />
+		<button onclick="uploadFiles()">Upload Files</button>
+		<div id="progress"></div>
+	</body>
+</html>
