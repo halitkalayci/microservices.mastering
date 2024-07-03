@@ -1,13 +1,19 @@
 package com.example.cdnservice.controller;
 
 import com.example.cdnservice.service.CdnService;
+import io.minio.GetObjectArgs;
+import io.minio.MinioClient;
+import io.minio.errors.MinioException;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 @RestController
 @RequestMapping("/api/v1/file")
@@ -15,9 +21,10 @@ import java.util.List;
 public class FileController {
 
     private final CdnService cdnService;
-
-    public FileController(CdnService cdnService) {
+    private final MinioClient minioClient;
+    public FileController(CdnService cdnService, MinioClient minioClient) {
         this.cdnService = cdnService;
+        this.minioClient = minioClient;
     }
 
     @PostMapping("upload")
@@ -42,6 +49,39 @@ public class FileController {
 
 
         return ResponseEntity.ok("");
+    }
+
+    @PostMapping("/zipFiles")
+    public void zipFiles(@RequestBody List<String> fileNames, HttpServletResponse response) throws Exception {
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.addHeader("Content-Disposition", "attachment; filename=\"files.zip\"");
+        response.setContentType("application/zip");
+
+        try (ZipOutputStream zipOutputStream = new ZipOutputStream(response.getOutputStream())) {
+            for (String fileName : fileNames) {
+                try (InputStream inputStream = minioClient.getObject(
+                        GetObjectArgs.builder()
+                                .bucket("default")
+                                .object(fileName)
+                                .build())) {
+
+                    ZipEntry zipEntry = new ZipEntry(fileName);
+                    zipOutputStream.putNextEntry(zipEntry);
+
+                    byte[] buffer = new byte[1024];
+                    int len;
+                    while ((len = inputStream.read(buffer)) > 0) {
+                        zipOutputStream.write(buffer, 0, len);
+                    }
+
+                    zipOutputStream.closeEntry();
+                } catch (MinioException e) {
+                    e.printStackTrace();
+                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    return;
+                }
+            }
+        }
     }
 
     @GetMapping("progress")
