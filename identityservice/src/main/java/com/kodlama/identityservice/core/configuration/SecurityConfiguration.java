@@ -26,6 +26,7 @@ public class SecurityConfiguration
     {
         baseSecurityService.configureCommonSecurity(http);
 
+        http.authorizeHttpRequests((req) -> req.anyRequest().permitAll());
 
         return http.build();
     }

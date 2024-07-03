@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/categoryservice/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdnservice/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/discoveryserver/src/main/java" charset="UTF-8" />
@@ -9,6 +10,7 @@
     <file url="file://$PROJECT_DIR$/gatewayserver/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/identityservice/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/order.orchestrator/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/order.orchestrator/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/orderservice/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/paymentservice/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/productservice/src/main/java" charset="UTF-8" />

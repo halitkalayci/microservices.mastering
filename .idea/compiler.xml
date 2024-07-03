@@ -17,6 +17,7 @@
         <module name="paymentservice" />
         <module name="orderorchestrator" />
         <module name="orderservice" />
+        <module name="cdnservice" />
       </profile>
       <profile name="Annotation profile for identityservice" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -35,6 +36,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="categoryservice" options="-parameters" />
+      <module name="cdnservice" options="-parameters" />
       <module name="common" options="-parameters" />
       <module name="core" options="-parameters" />
       <module name="discoveryserver" options="-parameters" />
