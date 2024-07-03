@@ -46,11 +46,12 @@ public class OrderController
     public String hello(@RequestParam Boolean shouldBreak)  {
         if(shouldBreak)
             throw new BusinessException("Deneme");
-        String productResponse = orderService.get();
+        String productResponse = productClient.get();
         return "Hello" + productResponse;
     }
-
-    //@CircuitBreaker(name="circuit1",fallbackMethod="fallbackMethod")
+    // Custom json writer
+    // Custom config
+    @CircuitBreaker(name="circuit1")
     private String getProductResponse()
     {
         throw new RuntimeException("");

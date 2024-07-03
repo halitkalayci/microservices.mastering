@@ -15,7 +15,7 @@ public class OrderServiceImpl implements OrderService {
     private final ProductClient productClient;
 
     @Override
-    @CircuitBreaker(name="circuit1", fallbackMethod = "fallbackMethod")
+    @CircuitBreaker(name="circuit1")
     //@Retry(name="retry1", fallbackMethod = "fallbackMethod")
     //@Cacheable(cacheNames = "callProductClientCache")
     public String get() {

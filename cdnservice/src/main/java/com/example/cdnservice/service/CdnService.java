@@ -28,11 +28,13 @@ public class CdnService {
         {
             minioClient.makeBucket(MakeBucketArgs.builder().bucket("default1").build());
         }
+
         ObjectWriteResponse response = minioClient.putObject(PutObjectArgs.builder()
                         .bucket("default1")
                         .object(fileName)
                         .stream(stream, file.getSize(), -1)
                         .contentType(file.getContentType()).build());
+
         return minioClient.getPresignedObjectUrl(GetPresignedObjectUrlArgs.builder()
                         .bucket("default1")
                         .object(fileName)
