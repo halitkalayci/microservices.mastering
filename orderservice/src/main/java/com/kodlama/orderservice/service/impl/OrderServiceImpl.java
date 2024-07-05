@@ -15,8 +15,8 @@ public class OrderServiceImpl implements OrderService {
     private final ProductClient productClient;
 
     @Override
-    @CircuitBreaker(name="circuit1")
-    //@Retry(name="retry1", fallbackMethod = "fallbackMethod")
+    //@CircuitBreaker(name="circuit1")
+    @Retry(name="retry1", fallbackMethod = "fallbackMethod")
     //@Cacheable(cacheNames = "callProductClientCache")
     public String get() {
         return productClient.get();
@@ -24,8 +24,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
-    public String fallbackMethod(Throwable throwable)
-    {
-        return "This service is temporarily unavaliable.";
+    public String fallbackMethod() {
+        return "FallbackMethod.OrderService";
     }
 }

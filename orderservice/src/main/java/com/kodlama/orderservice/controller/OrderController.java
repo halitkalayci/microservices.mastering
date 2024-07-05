@@ -23,7 +23,7 @@ import java.util.Date;
 @RestController
 @RequestMapping("api/v1/orders")
 @RequiredArgsConstructor
-public class OrderController
+public class OrderController extends BaseController
 {
     private final Pipeline pipeline;
     private final ProductClient productClient;
@@ -43,21 +43,23 @@ public class OrderController
     }
 
     @GetMapping
+    @Retry(name="retry1", fallbackMethod = "fallbackMethod")
     public String hello(@RequestParam Boolean shouldBreak)  {
         if(shouldBreak)
             throw new BusinessException("Deneme");
+        getProductResponse();
         String productResponse = productClient.get();
         return "Hello" + productResponse;
     }
+
+
     // Custom json writer
     // Custom config
-    @CircuitBreaker(name="circuit1")
     private String getProductResponse()
     {
         throw new RuntimeException("");
         //String response = productClient.get();
         //return "";
     }
-
 
 }
